@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Netflix Cancellation Probability Chart — Canada Sports Betting</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background: #fff; color: #1C2B3A; }
+  .csb-chart-wrap { max-width: 760px; margin: 0 auto; border: 1px solid #E0DDD6; border-radius: 12px; overflow: hidden; }
+  .csb-chart-header { background: #1C2B3A; color: #fff; padding: 18px 22px; position: relative; overflow: hidden; }
+  .csb-chart-header h2 { margin: 0 0 4px; font-size: 18px; font-weight: 800; }
+  .csb-chart-header p { margin: 0; font-size: 13px; color: #cdd5dd; }
+  .shimmer {
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #D0021B, #ff6b6b, #D0021B);
+    background-size: 200% 100%; animation: shimmer 3s linear infinite;
+  }
+  @keyframes shimmer { 0% { background-position: 0% 0; } 100% { background-position: 200% 0; } }
+  .csb-tabs { display: flex; gap: 6px; padding: 14px 18px 0; background: #f7f3ee; border-bottom: 1px solid #E0DDD6; }
+  .csb-tab {
+    flex: 1; text-align: center; padding: 9px 6px 11px; font-size: 12.5px; font-weight: 700;
+    color: #5b6b7a; cursor: pointer; border-bottom: 3px solid transparent; transition: all .15s ease;
+  }
+  .csb-tab.active { color: #D0021B; border-bottom-color: #D0021B; }
+  .csb-chart-body { padding: 20px 22px 10px; background: #fff; min-height: 380px; }
+
+  /* Bar chart view (cancellation probability) */
+  .csb-bar-row { display: grid; grid-template-columns: 26px 1fr; align-items: center; gap: 10px; margin-bottom: 11px; }
+  .csb-rank-num { font-size: 13px; font-weight: 800; color: #5b6b7a; text-align: right; }
+  .csb-bar-track { position: relative; background: #f0ece5; border-radius: 6px; height: 34px; margin-right: 6px; }
+  .csb-bar-fill { position: absolute; top: 0; left: 0; bottom: 0; border-radius: 6px; background: #D0021B; display: flex; align-items: center; transition: width .6s ease; }
+  .csb-bar-label-inside { color: #fff; font-size: 12.5px; font-weight: 700; padding-left: 10px; white-space: nowrap; }
+  .csb-bar-label-outside { position: absolute; top: 50%; transform: translateY(-50%); font-size: 12.5px; font-weight: 700; color: #1C2B3A; white-space: nowrap; }
+  .csb-bar-pct { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 12.5px; font-weight: 800; color: #fff; }
+  .csb-bar-pct.outside-pct { color: #1C2B3A; right: -42px; }
+
+  /* Pill grid view (renewed / cancelled) */
+  .csb-pill-grid { display: flex; flex-wrap: wrap; gap: 9px; }
+  .csb-show-pill {
+    font-size: 13px; font-weight: 600; padding: 8px 14px; border-radius: 20px;
+    border: 1px solid #E0DDD6; background: #f7f3ee; color: #1C2B3A;
+  }
+  .csb-show-pill.renewed { border-color: #0A7D2B; background: #eaf7ee; color: #0A7D2B; }
+  .csb-show-pill.cancelled { border-color: #D0021B; background: #fdeaea; color: #D0021B; }
+  .csb-summary-line {
+    font-size: 13.5px; color: #5b6b7a; margin-bottom: 14px; font-weight: 600;
+  }
+
+  .csb-pager { display: flex; justify-content: space-between; align-items: center; padding: 14px 22px 18px; font-size: 13px; color: #5b6b7a; }
+  .csb-pager button { background: #1C2B3A; color: #fff; border: none; border-radius: 6px; padding: 8px 14px; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+  .csb-pager button:disabled { background: #c9c4bb; cursor: not-allowed; }
+  .csb-footer { display: flex; justify-content: space-between; align-items: center; padding: 12px 22px; border-top: 1px solid #E0DDD6; background: #f7f3ee; font-size: 11.5px; color: #8b95a0; }
+  .csb-logo { font-weight: 800; color: #D0021B; font-size: 12.5px; }
+  @media (max-width: 640px) {
+    .csb-chart-header h2 { font-size: 16px; }
+    .csb-tab { font-size: 11px; padding: 8px 4px 9px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="csb-chart-wrap">
+  <div class="csb-chart-header">
+    <div class="shimmer"></div>
+    <h2>Netflix Renewal Tracker — 2026</h2>
+    <p>53 shows tracked: confirmed renewed, confirmed cancelled, and live cancellation odds</p>
+  </div>
+
+  <div class="csb-tabs">
+    <div class="csb-tab active" data-view="probability">Cancellation Probability</div>
+    <div class="csb-tab" data-view="renewed">Already Renewed (26)</div>
+    <div class="csb-tab" data-view="cancelled">Already Cancelled (18)</div>
+  </div>
+
+  <div class="csb-chart-body" id="chartBody"></div>
+
+  <div class="csb-pager" id="pagerWrap">
+    <span id="pagerLabel">Showing 1–8 of 8</span>
+    <div>
+      <button id="prevBtn" disabled>Previous 10</button>
+      <button id="nextBtn">Next 10</button>
+    </div>
+  </div>
+
+  <div class="csb-footer">
+    <span>Source: Rotten Tomatoes, Deadline, What's on Netflix, TVGuide, Netflix Tudum — data as of Jun 30, 2026</span>
+    <span class="csb-logo">CSB</span>
+  </div>
+</div>
+
+<script>
+const probability = [
+  { name: "Beef", pct: 53 },
+  { name: "The Witness", pct: 50 },
+  { name: "How to Get to Heaven From Belfast", pct: 47 },
+  { name: "Finding Her Edge", pct: 35 },
+  { name: "I Will Find You", pct: 27 },
+  { name: "Teach You a Lesson", pct: 27 },
+  { name: "Nemesis", pct: 26 },
+  { name: "Man on Fire", pct: 23 }
+];
+
+const renewed = [
+  "Avatar: The Last Airbender","The Four Seasons","Barbecue Showdown","Black Mirror","3 Body Problem",
+  "One Piece","Nobody Wants This","Bridgerton","The Lincoln Lawyer","The Night Agent","Emily in Paris",
+  "Devil May Cry","A Good Girl's Guide to Murder","Beauty in Black","My Life with the Walter Boys",
+  "Funny AF with Kevin Hart","House of Guinness","Love Is Blind","Love on the Spectrum U.S.",
+  "Little House on the Prairie","Ginny & Georgia","Worst Ex Ever","I Think You Should Leave",
+  "Indian Matchmaking","Is It Cake?","Leanne"
+];
+
+const cancelled = [
+  "The Boroughs","Building the Band","Bandi","Pop the Balloon Live","Strip Law","Selling the City",
+  "Miss Governor","Alice in Borderland","Terminator Zero","The Vince Staples Show","The Abandons",
+  "F1: The Academy","What's in the Box?","Class","With Love, Meghan","You","Boots","The Waterfront"
+];
+
+let page = 0;
+const pageSize = 10;
+let currentView = "probability";
+
+function renderProbability() {
+  document.getElementById('pagerWrap').style.display = 'flex';
+  const sorted = [...probability].sort((a,b) => b.pct - a.pct);
+  const maxPct = Math.max(...sorted.map(s => s.pct));
+  const body = document.getElementById('chartBody');
+  body.innerHTML = '';
+  sorted.forEach((show, i) => {
+    const widthPct = Math.max((show.pct / maxPct) * 100, 18);
+    const isLong = widthPct > 38;
+    const row = document.createElement('div');
+    row.className = 'csb-bar-row';
+    const rankEl = document.createElement('div');
+    rankEl.className = 'csb-rank-num';
+    rankEl.textContent = i + 1;
+    const track = document.createElement('div');
+    track.className = 'csb-bar-track';
+    const fill = document.createElement('div');
+    fill.className = 'csb-bar-fill';
+    fill.style.width = widthPct + '%';
+    if (isLong) {
+      const lbl = document.createElement('span');
+      lbl.className = 'csb-bar-label-inside';
+      lbl.textContent = show.name;
+      fill.appendChild(lbl);
+      const pct = document.createElement('span');
+      pct.className = 'csb-bar-pct';
+      pct.textContent = show.pct + '%';
+      fill.appendChild(pct);
+    } else {
+      const lbl = document.createElement('span');
+      lbl.className = 'csb-bar-label-outside';
+      lbl.style.left = (widthPct + 2) + '%';
+      lbl.textContent = show.name;
+      track.appendChild(lbl);
+      const pct = document.createElement('span');
+      pct.className = 'csb-bar-pct outside-pct';
+      pct.textContent = show.pct + '%';
+      fill.appendChild(pct);
+    }
+    track.appendChild(fill);
+    row.appendChild(rankEl);
+    row.appendChild(track);
+    body.appendChild(row);
+  });
+  document.getElementById('pagerLabel').textContent = `Showing 1\u2013${sorted.length} of ${sorted.length}`;
+  document.getElementById('prevBtn').disabled = true;
+  document.getElementById('nextBtn').disabled = true;
+}
+
+function renderPillGrid(list, cls, label) {
+  document.getElementById('pagerWrap').style.display = 'none';
+  const body = document.getElementById('chartBody');
+  body.innerHTML = '';
+  const summary = document.createElement('div');
+  summary.className = 'csb-summary-line';
+  summary.textContent = `${list.length} shows ${label} in 2026`;
+  body.appendChild(summary);
+  const grid = document.createElement('div');
+  grid.className = 'csb-pill-grid';
+  list.forEach(name => {
+    const pill = document.createElement('span');
+    pill.className = 'csb-show-pill ' + cls;
+    pill.textContent = name;
+    grid.appendChild(pill);
+  });
+  body.appendChild(grid);
+}
+
+function render() {
+  if (currentView === 'probability') renderProbability();
+  else if (currentView === 'renewed') renderPillGrid(renewed, 'renewed', 'confirmed renewed');
+  else if (currentView === 'cancelled') renderPillGrid(cancelled, 'cancelled', 'confirmed cancelled');
+}
+
+document.querySelectorAll('.csb-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.csb-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentView = tab.dataset.view;
+    page = 0;
+    render();
+  });
+});
+
+render();
+</script>
+
+</body>
+</html>
