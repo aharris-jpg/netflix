@@ -7,7 +7,8 @@
 <style>
 * { box-sizing: border-box; }
 body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background: #fff; color: #1C2B3A; }
-.wrap { max-width: 760px; margin: 0 auto; border: 1px solid #E0DDD6; border-radius: 12px; overflow: hidden; }
+.wrap { max-width: 720px; margin: 0 auto; border: 1px solid #E0DDD6; border-radius: 12px; overflow: hidden; }
+
 .hdr { background: #1C2B3A; color: #fff; padding: 18px 22px; position: relative; overflow: hidden; }
 .hdr h2 { margin: 0 0 4px; font-size: 18px; font-weight: 800; }
 .hdr p { margin: 0; font-size: 13px; color: #cdd5dd; }
@@ -17,6 +18,7 @@ body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background:
   background-size: 200% 100%; animation: sh 3s linear infinite;
 }
 @keyframes sh { 0%{background-position:0% 0}100%{background-position:200% 0} }
+
 .tabs { display: flex; background: #f7f3ee; border-bottom: 1px solid #E0DDD6; }
 .tab {
   flex: 1; text-align: center; padding: 11px 6px 12px; font-size: 12.5px; font-weight: 700;
@@ -25,68 +27,48 @@ body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background:
 }
 .tab:last-child { border-right: none; }
 .tab.active { color: #D0021B; border-bottom-color: #D0021B; background: #fff; }
-.t { width: 100%; border-collapse: collapse; }
-.t thead tr { border-bottom: 2px solid #E0DDD6; background: #f7f3ee; }
-.t thead th {
-  padding: 11px 14px; font-size: 11.5px; font-weight: 700; text-align: left;
-  color: #5b6b7a; text-transform: uppercase; letter-spacing: 0.05em;
-  white-space: nowrap; border-right: 1px solid #E0DDD6;
+
+.body { padding: 20px 22px 16px; }
+
+/* Each show row */
+.show { margin-bottom: 18px; }
+.show:last-child { margin-bottom: 0; }
+
+.show-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 5px; gap: 12px;
 }
-.t thead th:last-child { border-right: none; }
-.th-inner { display: inline-flex; align-items: center; gap: 5px; cursor: default; }
-.hint-icon {
-  width: 15px; height: 15px; border-radius: 50%; background: #c0c8d0; color: #fff;
-  font-size: 9.5px; font-weight: 800; display: inline-flex; align-items: center;
-  justify-content: center; flex-shrink: 0; cursor: help;
-}
-.t tbody tr { border-bottom: 1px solid #E0DDD6; transition: background .1s; }
-.t tbody tr:last-child { border-bottom: none; }
-.t tbody tr:hover { background: #fafaf8; }
-.t tbody td { padding: 13px 14px; vertical-align: middle; border-right: 1px solid #E0DDD6; }
-.t tbody td:last-child { border-right: none; }
-.col-show { min-width: 140px; }
-.show-name { font-weight: 700; font-size: 13.5px; margin-bottom: 6px; line-height: 1.3; }
-.bar-track { background: #f0ece5; border-radius: 3px; height: 6px; }
-.bar-fill { height: 6px; border-radius: 3px; background: #D0021B; }
+.show-name { font-size: 14px; font-weight: 700; flex: 1; }
+.show-pct { font-size: 16px; font-weight: 800; color: #D0021B; white-space: nowrap; flex-shrink: 0; }
+.show-pct.safe { color: #5b6b7a; }
+
+.bar-track { background: #f0ece5; border-radius: 3px; height: 7px; margin-bottom: 5px; }
+.bar-fill { height: 7px; border-radius: 3px; background: #D0021B; }
 .bar-fill.safe { background: #9bb8d4; }
-.col-prob { width: 90px; }
-.prob-num { font-size: 18px; font-weight: 800; color: #D0021B; }
-.prob-num.safe { color: #5b6b7a; }
-.prob-odds { font-size: 11.5px; color: #8b95a0; margin-top: 2px; }
-.col-data { width: 105px; }
-.dv { font-size: 13.5px; font-weight: 700; color: #1C2B3A; }
-.dv.risk { color: #1C2B3A; }
-.dv.good { color: #1C2B3A; }
-#tt-global {
-  display: none; position: fixed; z-index: 99999;
-  background: #1C2B3A; color: #fff; border-radius: 8px;
-  padding: 13px 16px; font-size: 13px; line-height: 1.6; font-weight: 400;
-  max-width: 260px; box-shadow: 0 6px 24px rgba(0,0,0,.25); pointer-events: none;
+
+.show-data {
+  font-size: 12px; color: #8b95a0; line-height: 1.4;
 }
-#tt-global strong { display: block; margin-bottom: 6px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,.15); padding-bottom: 6px; }
-.pill-wrap { padding: 20px 22px; }
+
+/* Pill views */
+.pill-wrap { padding: 4px 0; }
 .pill-summary { font-size: 13.5px; color: #5b6b7a; margin-bottom: 14px; font-weight: 600; }
 .pill-grid { display: flex; flex-wrap: wrap; gap: 9px; }
 .pill { font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 20px; border: 1px solid #E0DDD6; background: #f7f3ee; color: #1C2B3A; }
 .pill.renewed { border-color: #1C2B3A; background: #f7f3ee; color: #1C2B3A; }
 .pill.cancelled { border-color: #D0021B; background: #fdeaea; color: #D0021B; }
+
 .footer { display: flex; justify-content: space-between; align-items: center; padding: 11px 22px; border-top: 1px solid #E0DDD6; background: #f7f3ee; font-size: 11.5px; color: #8b95a0; }
 .logo { font-weight: 800; color: #D0021B; font-size: 12.5px; }
-@media (max-width: 600px) {
-  .hdr h2 { font-size: 15px; }
-  .tab { font-size: 11px; padding: 9px 3px 10px; }
-  .col-data { width: 80px; }
-  .t tbody td { padding: 10px 9px; }
-  .dv { font-size: 12.5px; }
-  .show-name { font-size: 12.5px; }
-  .prob-num { font-size: 16px; }
+
+@media (max-width: 540px) {
+  .show-name { font-size: 13px; }
+  .show-pct { font-size: 15px; }
+  .body { padding: 16px 16px 12px; }
 }
 </style>
 </head>
 <body>
-
-<div id="tt-global"></div>
-
 <div class="wrap">
   <div class="hdr">
     <div class="shimmer"></div>
@@ -98,7 +80,7 @@ body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background:
     <div class="tab" data-view="renewed">Confirmed Renewed (27)</div>
     <div class="tab" data-view="cancelled">Confirmed Cancelled (18)</div>
   </div>
-  <div id="chartBody"></div>
+  <div class="body" id="chartBody"></div>
   <div class="footer">
     <span>IMDb &middot; Rotten Tomatoes &middot; Netflix Tudum &mdash; Jun 30, 2026</span>
     <span class="logo">CanadaSportsBetting.ca</span>
@@ -107,54 +89,21 @@ body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background:
 
 <script>
 var MAX = 79.33;
-var ttEl = document.getElementById('tt-global');
-
-function showTt(title, body, e) {
-  ttEl.innerHTML = '<strong>' + title + '</strong>' + body;
-  ttEl.style.display = 'block';
-  placeTt(e);
-}
-function placeTt(e) {
-  var pad = 12, w = ttEl.offsetWidth, h = ttEl.offsetHeight;
-  var x = e.clientX + 16, y = e.clientY + 16;
-  if (x + w > window.innerWidth - pad) x = e.clientX - w - 16;
-  if (y + h > window.innerHeight - pad) y = e.clientY - h - 16;
-  ttEl.style.left = x + 'px';
-  ttEl.style.top  = y + 'px';
-}
-function hideTt() { ttEl.style.display = 'none'; }
-document.addEventListener('mousemove', function(e) { if (ttEl.style.display === 'block') placeTt(e); });
-
-var cols = [
-  { key:'days',  label:'Days',
-    title:'Days without a decision',
-    body:'How many days since premiere with no Netflix renewal or cancellation announcement. Netflix typically decides within 28 days. The longer the silence past that window, the stronger the risk signal. This carries 35% of the total score.' },
-  { key:'weeks', label:'Top 10',
-    title:'Weeks in Netflix Global Top 10',
-    body:'Real count of weeks the show appeared in Netflix\'s own published Global Top 10 chart, including a genuine zero for shows that never charted. More weeks means a stronger audience signal. This carries 25% of the score.' },
-  { key:'rt',    label:'RT Score',
-    title:'Rotten Tomatoes critic / audience',
-    body:'Rotten Tomatoes critic score and audience score, shown together. Both are included in the calculation. Combined with the IMDb rating, this reception data makes up 25% of the total score.' },
-  { key:'imdb',  label:'IMDb',
-    title:'IMDb rating and live popularity',
-    body:'IMDb rating plus the show\'s live popularity rank on IMDb\'s real-time index. The rank shows whether interest is growing or falling right now, something a static score cannot capture. This carries 15% of the total score.' }
-];
-
 var shows = [
   { name:'How to Get to Heaven From Belfast', pct:79.33, safe:false,
-    days:{v:'138 days',r:'risk'}, weeks:{v:'0 weeks',r:'risk'}, rt:{v:'95% / 79%',r:''}, imdb:{v:'7.4 \u00b7 #380',r:''} },
+    data:'138 days without a decision &middot; 0 weeks in Top 10 &middot; RT 95% / 79% &middot; IMDb 7.4 &middot; #380 popularity' },
   { name:'Beef', pct:44.19, safe:false,
-    days:{v:'75 days',r:'risk'}, weeks:{v:'2 weeks',r:'risk'}, rt:{v:'89% / 63%',r:''}, imdb:{v:'7.5 \u00b7 #69',r:'good'} },
+    data:'75 days without a decision &middot; 2 weeks in Top 10 &middot; RT 89% / 63% &middot; IMDb 7.5 (S2) &middot; #69 popularity' },
   { name:'Nemesis', pct:37.08, safe:false,
-    days:{v:'47 days',r:''}, weeks:{v:'5+ weeks',r:'good'}, rt:{v:'76% / 52%',r:'risk'}, imdb:{v:'6.1 \u00b7 #184',r:'risk'} },
+    data:'47 days without a decision &middot; 5+ weeks in Top 10 &middot; RT 76% / 52% &middot; IMDb 6.1 &middot; #184 popularity' },
   { name:'The Witness', pct:34.56, safe:false,
-    days:{v:'26 days',r:''}, weeks:{v:'3 weeks',r:''}, rt:{v:'100% / 49%',r:''}, imdb:{v:'6.5 \u00b7 #127',r:'risk'} },
+    data:'26 days without a decision &middot; 3 weeks in Top 10 &middot; RT 100% / 49% &middot; IMDb 6.5 &middot; #127 popularity' },
   { name:'I Will Find You', pct:29.65, safe:true,
-    days:{v:'12 days',r:'good'}, weeks:{v:'2 weeks',r:'good'}, rt:{v:'61% / 62%',r:''}, imdb:{v:'7.2 \u00b7 #1',r:'good'} },
+    data:'12 days without a decision &middot; 2 weeks in Top 10 &middot; RT 61% / 62% &middot; IMDb 7.2 &middot; #1 popularity' },
   { name:'Man on Fire', pct:28.28, safe:true,
-    days:{v:'61 days',r:'risk'}, weeks:{v:'7 weeks',r:'good'}, rt:{v:'58% / 63%',r:'risk'}, imdb:{v:'6.7 \u00b7 #126',r:'good'} },
+    data:'61 days without a decision &middot; 7 weeks in Top 10 &middot; RT 58% / 63% &middot; IMDb 6.7 &middot; #126 popularity' },
   { name:'Teach You a Lesson', pct:25.99, safe:true,
-    days:{v:'25 days',r:'good'}, weeks:{v:'3 wks at No.1',r:'good'}, rt:{v:'86% / 94%',r:'good'}, imdb:{v:'8.5 \u00b7 #24',r:'good'} }
+    data:'25 days without a decision &middot; 3 weeks in Top 10 &middot; RT 86% / 94% &middot; IMDb 8.5 &middot; #24 popularity' }
 ];
 
 var renewed = [
@@ -172,37 +121,22 @@ var cancelled = [
 ];
 
 function renderProb() {
-  var hdrs = cols.map(function(c) {
-    return '<th class="col-data"><div class="th-inner" data-title="' + c.title + '" data-body="' + c.body.replace(/"/g,'&quot;').replace(/'/g,'&#39;') + '">' + c.label + ' <span class="hint-icon">?</span></div></th>';
-  }).join('');
-
-  var rows = shows.map(function(s) {
+  var html = '';
+  shows.forEach(function(s) {
     var w = (s.pct / MAX * 100).toFixed(1);
-    var cells = cols.map(function(c) {
-      var d = s[c.key];
-      return '<td class="col-data"><div class="dv ' + d.r + '">' + d.v + '</div></td>';
-    }).join('');
-    return '<tr>'
-      + '<td class="col-show"><div class="show-name">' + s.name + '</div>'
-      + '<div class="bar-track"><div class="bar-fill ' + (s.safe ? 'safe' : '') + '" style="width:' + w + '%"></div></div></td>'
-      + '<td class="col-prob"><div class="prob-num ' + (s.safe ? 'safe' : '') + '">' + s.pct + '%</div>'
-      + '<div class="prob-odds">1-in-' + (100/s.pct).toFixed(1) + '</div></td>'
-      + cells + '</tr>';
-  }).join('');
-
-  document.getElementById('chartBody').innerHTML =
-    '<table class="t"><thead><tr>'
-    + '<th>Show</th><th>Implied Probability</th>' + hdrs
-    + '</tr></thead><tbody>' + rows + '</tbody></table>';
-
-  document.querySelectorAll('.th-inner').forEach(function(el) {
-    el.addEventListener('mouseenter', function(e) { showTt(el.dataset.title, el.dataset.body, e); });
-    el.addEventListener('mouseleave', hideTt);
+    html += '<div class="show">'
+      + '<div class="show-top">'
+      + '<div class="show-name">' + s.name + '</div>'
+      + '<div class="show-pct ' + (s.safe ? 'safe' : '') + '">' + s.pct + '%</div>'
+      + '</div>'
+      + '<div class="bar-track"><div class="bar-fill ' + (s.safe ? 'safe' : '') + '" style="width:' + w + '%"></div></div>'
+      + '<div class="show-data">' + s.data + '</div>'
+      + '</div>';
   });
+  document.getElementById('chartBody').innerHTML = html;
 }
 
 function renderPills(list, cls, label) {
-  hideTt();
   var pills = list.map(function(n) { return '<span class="pill ' + cls + '">' + n + '</span>'; }).join('');
   document.getElementById('chartBody').innerHTML =
     '<div class="pill-wrap"><div class="pill-summary">' + list.length + ' shows ' + label + ' in 2026</div>'
