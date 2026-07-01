@@ -1,393 +1,305 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-.csb-netflix-cancel-odds-article * { box-sizing: border-box; }
-.csb-netflix-cancel-odds-article {
+.csb-nco * { box-sizing: border-box; }
+.csb-nco {
   font-family: Georgia, 'Source Serif 4', serif;
-  color: #1C2B3A;
-  max-width: 820px;
-  margin: 0 auto;
-  line-height: 1.65;
-  font-size: 17px;
+  color: #1C2B3A; max-width: 820px; margin: 0 auto;
+  line-height: 1.65; font-size: 17px;
 }
-.csb-netflix-cancel-odds-article h1 {
+.csb-nco h1 {
   font-family: system-ui, -apple-system, sans-serif;
-  font-size: 32px;
-  font-weight: 800;
-  line-height: 1.2;
-  margin: 0 0 18px;
+  font-size: 32px; font-weight: 800; line-height: 1.2; margin: 0 0 18px;
 }
-.csb-netflix-cancel-odds-article h2 {
+.csb-nco h2 {
   font-family: system-ui, -apple-system, sans-serif;
-  font-size: 23px;
-  font-weight: 700;
-  border-left: 5px solid #D0021B;
-  padding-left: 12px;
-  margin: 38px 0 16px;
+  font-size: 22px; font-weight: 700;
+  border-left: 5px solid #D0021B; padding-left: 12px; margin: 38px 0 16px;
 }
-.csb-netflix-cancel-odds-article h3.subhead {
+.csb-nco h3.entry {
   font-family: system-ui, -apple-system, sans-serif;
-  font-size: 17px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: #D0021B;
-  margin: 30px 0 14px;
-  padding-bottom: 6px;
-  border-bottom: 2px solid #E0DDD6;
+  font-size: 19px; font-weight: 700; margin: 30px 0 4px;
+  display: flex; align-items: center; gap: 12px;
 }
-.csb-netflix-cancel-odds-article h3.entry {
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 19px;
-  font-weight: 700;
-  margin: 26px 0 4px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.csb-nco .rank-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: #1C2B3A; color: #fff; font-size: 15px; font-weight: 800; flex-shrink: 0;
 }
-.csb-netflix-cancel-odds-article .rank-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: #1C2B3A;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 800;
-  flex-shrink: 0;
+.csb-nco .rank-badge.top { background: #D0021B; }
+.csb-nco p { margin: 0 0 14px; }
+.csb-nco .detail-line {
+  font-style: italic; color: #5b6b7a; font-size: 15px;
+  margin: 0 0 10px; font-family: system-ui, sans-serif;
 }
-.csb-netflix-cancel-odds-article .rank-badge.top { background: #D0021B; }
-.csb-netflix-cancel-odds-article p { margin: 0 0 14px; }
-.csb-netflix-cancel-odds-article .detail-line {
-  font-style: italic;
-  color: #5b6b7a;
-  font-size: 15px;
-  margin: 0 0 10px;
+.csb-nco ul.findings {
+  list-style: none; margin: 0 0 20px; padding: 0;
+}
+.csb-nco ul.findings li {
+  padding: 10px 0 10px 28px; border-bottom: 1px solid #E0DDD6; position: relative;
+}
+.csb-nco ul.findings li:before {
+  content: "\25B8"; color: #D0021B; position: absolute; left: 0; font-weight: 700;
+}
+.csb-nco .pills {
+  display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 14px;
   font-family: system-ui, sans-serif;
 }
-.csb-netflix-cancel-odds-article ul.findings {
-  list-style: none;
-  margin: 0 0 20px;
-  padding: 0;
+.csb-nco .pill {
+  background: #f7f3ee; border: 1px solid #E0DDD6;
+  border-radius: 20px; padding: 5px 13px; font-size: 13px; color: #1C2B3A;
 }
-.csb-netflix-cancel-odds-article ul.findings li {
-  padding: 10px 0 10px 28px;
-  border-bottom: 1px solid #E0DDD6;
-  position: relative;
+.csb-nco .pill.score {
+  background: #D0021B; color: #fff; border-color: #D0021B; font-weight: 700;
 }
-.csb-netflix-cancel-odds-article ul.findings li:before {
-  content: "▸";
-  color: #D0021B;
-  position: absolute;
-  left: 0;
-  font-weight: 700;
+
+/* Odds table */
+.csb-nco .odds-table-wrap { margin: 22px 0 30px; overflow-x: auto; }
+.csb-nco table.odds-table {
+  width: 100%; border-collapse: collapse; font-family: system-ui, sans-serif; font-size: 15px;
 }
-.csb-netflix-cancel-odds-article .pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 10px 0 22px;
-  font-family: system-ui, sans-serif;
+.csb-nco table.odds-table th {
+  background: #1C2B3A; color: #fff; padding: 10px 14px; text-align: left;
+  font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em;
 }
-.csb-netflix-cancel-odds-article .pill {
-  background: #f7f3ee;
-  border: 1px solid #E0DDD6;
-  border-radius: 20px;
-  padding: 5px 13px;
-  font-size: 13px;
+.csb-nco table.odds-table td {
+  padding: 11px 14px; border-bottom: 1px solid #E0DDD6; vertical-align: middle;
 }
-.csb-netflix-cancel-odds-article .pill.score {
-  background: #D0021B;
-  color: #fff;
-  border-color: #D0021B;
-  font-weight: 700;
+.csb-nco table.odds-table tr:hover td { background: #f7f3ee; }
+.csb-nco .pct-cell { font-weight: 800; font-size: 16px; color: #D0021B; }
+.csb-nco .pct-cell.muted { color: #5b6b7a; }
+.csb-nco .odds-cell { font-weight: 700; color: #5b6b7a; font-size: 14px; }
+.csb-nco .table-note td {
+  font-size: 13px; color: #8b95a0; font-style: italic;
+  border-bottom: none; padding-top: 8px; padding-bottom: 0;
 }
-.csb-netflix-cancel-odds-article .pill.flag {
-  background: #fff3cd;
-  border-color: #f0d97a;
-  color: #6b5400;
-  font-weight: 700;
+
+/* Data grid — clean, no colour coding */
+.csb-nco .data-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 9px; margin: 10px 0 18px; font-family: system-ui, sans-serif;
 }
-.csb-netflix-cancel-odds-article .embed-wrap {
-  border: 1px solid #E0DDD6;
-  border-radius: 12px;
-  overflow: hidden;
-  margin: 26px 0;
+.csb-nco .dc {
+  background: #f7f3ee; border: 1px solid #E0DDD6; border-radius: 8px; padding: 10px 12px;
 }
-.csb-netflix-cancel-odds-article .embed-wrap iframe {
-  display: block;
-  width: 100%;
-  border: none;
+.csb-nco .dc-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: #8b95a0; margin-bottom: 4px;
 }
-.csb-netflix-cancel-odds-article .chart-note {
-  font-family: system-ui, sans-serif;
-  font-size: 13.5px;
-  color: #5b6b7a;
-  text-align: center;
-  margin: -10px 0 26px;
+.csb-nco .dc-value { font-size: 15px; font-weight: 800; color: #1C2B3A; line-height: 1.2; }
+
+/* Embed */
+.csb-nco .embed-wrap {
+  border: 1px solid #E0DDD6; border-radius: 12px; overflow: hidden; margin: 26px 0;
 }
-.csb-netflix-cancel-odds-article .callout-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 16px 0 18px;
-  font-family: system-ui, sans-serif;
-  font-size: 15px;
+.csb-nco .embed-wrap iframe { display: block; width: 100%; border: none; }
+.csb-nco .chart-note {
+  font-family: system-ui, sans-serif; font-size: 13.5px;
+  color: #5b6b7a; text-align: center; margin: -10px 0 26px;
 }
-.csb-netflix-cancel-odds-article .callout-table th {
-  background: #1C2B3A;
-  color: #fff;
-  text-align: left;
-  padding: 10px 14px;
+
+/* Expert */
+.csb-nco .expert-block {
+  border-left: 4px solid #1C2B3A; background: #f7f3ee;
+  padding: 18px 22px; margin: 16px 0; border-radius: 0 8px 8px 0;
 }
-.csb-netflix-cancel-odds-article .callout-table td {
-  padding: 10px 14px;
-  border-bottom: 1px solid #E0DDD6;
+.csb-nco .expert-block p { margin: 0 0 12px; font-size: 16.5px; }
+.csb-nco .expert-block p:last-of-type { margin-bottom: 0; }
+.csb-nco .expert-block .quote-mark {
+  font-family: Georgia, serif; font-size: 48px; line-height: 0;
+  color: #D0021B; margin: 0 0 -6px; font-weight: 800;
 }
-.csb-netflix-cancel-odds-article .contrast-line {
-  font-weight: 700;
-  color: #D0021B;
-  font-family: system-ui, sans-serif;
+.csb-nco .attribution {
+  font-family: system-ui, sans-serif; font-size: 14px;
+  color: #5b6b7a; margin-top: 10px; font-style: italic;
 }
-.csb-netflix-cancel-odds-article .expert-block {
-  border-left: 4px solid #1C2B3A;
-  background: #f7f3ee;
-  padding: 18px 22px;
-  margin: 16px 0;
-  border-radius: 0 8px 8px 0;
+.csb-nco .contrast-line { font-weight: 700; color: #D0021B; font-family: system-ui, sans-serif; }
+.csb-nco .final-line { font-style: italic; font-size: 17px; margin-top: 18px; }
+.csb-nco .methodology p { font-size: 15.5px; color: #33414f; }
+.csb-nco .sources {
+  font-family: system-ui, sans-serif; font-size: 14.5px;
+  list-style: none; padding: 0; margin: 0;
 }
-.csb-netflix-cancel-odds-article .expert-block p {
-  margin: 0 0 12px;
-  font-size: 16.5px;
-}
-.csb-netflix-cancel-odds-article .expert-block p:last-of-type { margin-bottom: 0; }
-.csb-netflix-cancel-odds-article .expert-block .quote-mark {
-  font-family: Georgia, serif;
-  font-size: 48px;
-  line-height: 0;
-  color: #D0021B;
-  margin: 0 0 -6px;
-  font-weight: 800;
-}
-.csb-netflix-cancel-odds-article .attribution {
-  font-family: system-ui, sans-serif;
-  font-size: 14px;
-  color: #5b6b7a;
-  margin-top: 10px;
-  font-style: italic;
-}
-.csb-netflix-cancel-odds-article .final-line {
-  font-style: italic;
-  font-size: 17px;
-  margin-top: 18px;
-}
-.csb-netflix-cancel-odds-article .internal-links {
-  font-family: system-ui, sans-serif;
-  font-size: 15px;
-  background: #f7f3ee;
-  border: 1px solid #E0DDD6;
-  border-radius: 8px;
-  padding: 14px 18px;
-  margin: 30px 0;
-}
-.csb-netflix-cancel-odds-article .internal-links a {
-  color: #D0021B;
-  font-weight: 700;
-  text-decoration: none;
-}
-.csb-netflix-cancel-odds-article .methodology p { font-size: 15.5px; color: #33414f; }
-.csb-netflix-cancel-odds-article .sources {
-  font-family: system-ui, sans-serif;
-  font-size: 14.5px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.csb-netflix-cancel-odds-article .sources li { padding: 6px 0; border-bottom: 1px solid #E0DDD6; }
-.csb-netflix-cancel-odds-article .sources a { color: #D0021B; font-weight: 700; }
+.csb-nco .sources li { padding: 6px 0; border-bottom: 1px solid #E0DDD6; }
+.csb-nco .sources a { color: #D0021B; font-weight: 700; }
 @media (max-width: 600px) {
-  .csb-netflix-cancel-odds-article h1 { font-size: 25px; }
-  .csb-netflix-cancel-odds-article h2 { font-size: 19px; }
-  .csb-netflix-cancel-odds-article { font-size: 16px; }
+  .csb-nco h1 { font-size: 25px; }
+  .csb-nco h2 { font-size: 19px; }
+  .csb-nco { font-size: 16px; }
+  .csb-nco .data-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 
-<div class="csb-netflix-cancel-odds-article">
+<div class="csb-nco">
 
-<h1>The Netflix Shows Most Likely to Get Cancelled in 2026 (Ranked by Odds)</h1>
+<h1>Netflix Cancellation Odds 2026: Which Shows Are Getting Cut?</h1>
 
-<h2>Netflix Just Cancelled Two More Shows. Here's Who Could Be Next.</h2>
-<p>Netflix axed Building the Band on June 26 and The Boroughs on June 17, the latest in a wave of 2026 cancellations that has already wiped out 18 shows this year.</p>
-<p>We analyse odds for a living, so we pointed that lens at Netflix's own renewal data to see which shows are next on the chopping block, and which ones are safe.</p>
-<p><strong>Boots</strong> doubled its viewership in week two and peaked at No. 2 globally. Netflix cancelled it anyway. Popularity is no longer a safety net.</p>
-<p class="contrast-line">34% of Netflix originals tracked this year are already gone. Here's who's likely to join them next.</p>
+<h2>18 cancellations. 7 shows with no verdict. Here's who's next.</h2>
+
+<p>At Canada Sports Betting, we analyse odds for a living.</p>
+<p>We apply the same framework to sports, elections, and financial markets. When Netflix started cancelling shows at record pace, we pointed the same lens at their renewal data.</p>
+<p>We tracked 52 Netflix originals. 18 are cancelled. 26 are renewed. 7 are still waiting.</p>
+<p>Each show below has an <strong>Implied Probability of Cancellation</strong>, built from four verified data points: how long Netflix has gone silent, chart performance, critic and audience scores, and live IMDb popularity. Every number pulled directly from source on June 30, 2026.</p>
+<p class="contrast-line">Boots doubled its audience week on week. Netflix cancelled it anyway.</p>
+
+<div class="embed-wrap">
+<iframe src="https://aharris-jpg.github.io/netflix/chart.html" height="620" loading="lazy" title="Netflix Cancellation Odds Chart 2026"></iframe>
+</div>
+<p class="chart-note">Hover any column header to see how each data point affects the probability.</p>
 
 <h2>Key Findings</h2>
 <ul class="findings">
-<li><strong>34% of shows tracked</strong> are already cancelled in 2026, 18 out of 53.</li>
-<li><strong>Beef</strong> is the show most likely to be cancelled next, at <strong>53%</strong>.</li>
-<li><strong>Man on Fire</strong> is the safest bet on the board, at just <strong>23%</strong>.</li>
-<li><strong>Boots</strong> doubled its viewership and hit No. 2 globally, then got cancelled anyway.</li>
-<li><strong>You</strong> is confirmed to end after Season 5.</li>
-<li><strong>I Will Find You</strong> and <strong>Finding Her Edge</strong> are the two genuine toss-ups, the data points both ways for each.</li>
+<li><strong>Belfast leads at 79.33%.</strong> 138 days without a decision. Never charted globally. Once.</li>
+<li><strong>Beef Season 2 lost 58% of its opening audience</strong> versus Season 1. Emmy pedigree did not help.</li>
+<li><strong>Nemesis has the widest critic-audience gap on this list.</strong> 76% from critics. 52% from audiences.</li>
+<li><strong>I Will Find You is #1 on all of IMDb right now.</strong> The most searched title on the platform. It is 12 days old.</li>
+<li><strong>Man on Fire is 61 days without a decision</strong> but spent 7 weeks in the Global Top 10. Audiences kept showing up.</li>
+<li><strong>Teach You a Lesson is the safest show on the board.</strong> 94% audience score. 8.5 on IMDb. 39.3 million views.</li>
 </ul>
 
-<div class="embed-wrap">
-<iframe src="https://aharris-jpg.github.io/netflix/chart.html" height="780" loading="lazy" title="Netflix Cancellation Probability Chart"></iframe>
-</div>
-<p class="chart-note">Tap the tabs to see which shows are renewed, cancelled, or still on the bubble.</p>
+<h2>Most Likely to Be Cancelled</h2>
 
-<h2>The 5 Shows Most Likely to Get Cancelled Next</h2>
-<p>These are the undecided shows with the highest cancellation risk, backed by real viewership and critic data.</p>
-
-<h3 class="entry"><span class="rank-badge top">1</span> Beef</h3>
-<p class="detail-line">Netflix · Dark Comedy Anthology · 53% Cancellation Probability</p>
-<p>Beef's first season won Emmys. Season 2 swapped in a new cast, and the audience didn't follow.</p>
-<p>The new season drew just 2.4 million views in week one, trailing XO Kitty, The Lincoln Lawyer and Virgin River, despite a solid 62% audience score.</p>
+<h3 class="entry"><span class="rank-badge top">1</span> How to Get to Heaven From Belfast</h3>
+<p class="detail-line">Netflix &middot; Comedy Drama &middot; 79.33% &middot; 1-in-1.3</p>
+<p>Premiered February 12. <strong>138 days of silence from Netflix.</strong></p>
+<p>Never appeared in the Global Top 10. Anywhere. Once.</p>
+<p>Reviews are strong: 95% critic, 79% audience. It does not matter without chart numbers to back it up.</p>
+<p>Five months. No word. That is the story.</p>
 <div class="pills">
-<span class="pill score">53% Cancel Probability</span>
-<span class="pill">2.4M views, week 1</span>
-<span class="pill">62% RT audience score</span>
+<span class="pill score">79.33%</span>
+<span class="pill">138 days</span>
+<span class="pill">0 weeks in Top 10</span>
+<span class="pill">95% / 79% RT</span>
+<span class="pill">7.4 IMDb &middot; #380</span>
 </div>
 
-<h3 class="entry"><span class="rank-badge top">2</span> The Witness</h3>
-<p class="detail-line">Netflix · True Crime Miniseries · 50% Cancellation Probability</p>
-<p>The Witness hit No. 1 globally in week two with 10.1 million views.</p>
-<p>By week three, that number collapsed to 2.8 million, a 72% drop, the steepest fall on this list.</p>
+<h3 class="entry"><span class="rank-badge top">2</span> Beef</h3>
+<p class="detail-line">Netflix &middot; Dark Comedy &middot; 44.19% &middot; 1-in-2.3</p>
+<p>Season 1 won 8 Emmys. Season 2 brought in Oscar Isaac and Carey Mulligan.</p>
+<p><strong>The audience dropped 58% from Season 1's opening week.</strong></p>
+<p>2.4 million views in week one. Two weeks on the English chart. Then gone.</p>
+<p>89% on Rotten Tomatoes. Reviews do not renew shows. Viewers do.</p>
 <div class="pills">
-<span class="pill score">50% Cancel Probability</span>
-<span class="pill">10.1M to 2.8M in 1 week</span>
+<span class="pill score">44.19%</span>
+<span class="pill">75 days</span>
+<span class="pill">2 weeks on chart</span>
+<span class="pill">89% / 63% RT</span>
+<span class="pill">7.5 IMDb S2 &middot; #69</span>
 </div>
 
 <div class="embed-wrap">
 <iframe src="pic1.html" height="420" loading="lazy" title="Streaming viewing image"></iframe>
 </div>
 
-<h3 class="entry"><span class="rank-badge top">3</span> How to Get to Heaven From Belfast</h3>
-<p class="detail-line">Netflix · Drama · 47% Cancellation Probability</p>
-<p>From Derry Girls creator Lisa McGee, this Belfast-set drama earned 4-star reviews from The Guardian and The Independent.</p>
-<p>Critics loved it. Viewers didn't show up in the numbers Netflix wants.</p>
+<h3 class="entry"><span class="rank-badge top">3</span> Nemesis</h3>
+<p class="detail-line">Netflix &middot; Crime Drama &middot; 37.08% &middot; 1-in-2.7</p>
+<p>No.2 global debut. Top 10 in 83 countries. Five weeks on the chart.</p>
+<p><strong>Critics gave it 76%. Audiences gave it 52%.</strong> Biggest gap on this list.</p>
+<p>IMDb sits at 6.1. Lowest of any show here. Popularity down 48 spots.</p>
+<p>The chart is buying time. The audience data is not reassuring.</p>
 <div class="pills">
-<span class="pill score">47% Cancel Probability</span>
-<span class="pill">4-star reviews, The Guardian and The Independent</span>
+<span class="pill score">37.08%</span>
+<span class="pill">47 days</span>
+<span class="pill">5+ weeks on chart</span>
+<span class="pill">76% / 52% RT</span>
+<span class="pill">6.1 IMDb &middot; #184 &darr;48</span>
 </div>
 
-<h3 class="entry"><span class="rank-badge top">4</span> Finding Her Edge</h3>
-<p class="detail-line">Netflix · Teen Drama · 35% Cancellation Probability</p>
-<p>Sources disagree. One tracker lists this show as cancelled. Another says it hit the Top 10 in 81 countries and is coming back.</p>
-<p>Until Netflix makes an official call, the status stays genuinely unresolved.</p>
+<h3 class="entry"><span class="rank-badge top">4</span> The Witness</h3>
+<p class="detail-line">Netflix &middot; Crime Drama &middot; 34.56% &middot; 1-in-2.9</p>
+<p>Hit No.1 globally in week two. 10.1 million views.</p>
+<p><strong>Fell 72% to 2.8 million by week three.</strong> Steepest drop on this list.</p>
+<p>100% from critics. 49% from audiences. 6.5 on IMDb. Down 61 spots on popularity.</p>
+<p>Critics loved it. The broader audience did not.</p>
 <div class="pills">
-<span class="pill score">35% Cancel Probability</span>
-<span class="pill">Top 10 in 81 countries</span>
+<span class="pill score">34.56%</span>
+<span class="pill">26 days</span>
+<span class="pill">3 weeks on chart</span>
+<span class="pill">100% / 49% RT</span>
+<span class="pill">6.5 IMDb &middot; #127 &darr;61</span>
+</div>
+
+<h2>Most Likely to Be Renewed</h2>
+
+<h3 class="entry"><span class="rank-badge">5</span> I Will Find You</h3>
+<p class="detail-line">Netflix &middot; Crime Drama &middot; 29.65% &middot; 1-in-3.4</p>
+<p>12 days old. Netflix has not had time to decide.</p>
+<p><strong>Currently the #1 most popular title on all of IMDb.</strong></p>
+<p>At No.1 on the global chart and still climbing.</p>
+<p>Rotten Tomatoes scores are average. The real-time audience interest is not.</p>
+<div class="pills">
+<span class="pill score">29.65%</span>
+<span class="pill">12 days</span>
+<span class="pill">2 weeks &middot; at No.1</span>
+<span class="pill">61% / 62% RT</span>
+<span class="pill">7.2 IMDb &middot; #1</span>
+</div>
+
+<h3 class="entry"><span class="rank-badge">6</span> Man on Fire</h3>
+<p class="detail-line">Netflix &middot; Action Drama &middot; 28.28% &middot; 1-in-3.5</p>
+<p>58% on Rotten Tomatoes. Weakest critic score on this list.</p>
+<p><strong>7 weeks in the Global Top 10. Two of them at No.1.</strong></p>
+<p>Most sustained chart run of any undecided show this year. Popularity up 15 spots.</p>
+<p>Audiences showed up. That is what Netflix counts.</p>
+<div class="pills">
+<span class="pill score">28.28%</span>
+<span class="pill">61 days</span>
+<span class="pill">7 weeks &middot; 2 at No.1</span>
+<span class="pill">58% / 63% RT</span>
+<span class="pill">6.7 IMDb &middot; #126 &uarr;15</span>
 </div>
 
 <div class="embed-wrap">
-<iframe src="pic2.html" height="420" loading="lazy" title="Crime drama mood image"></iframe>
+<iframe src="pic2.html" height="420" loading="lazy" title="Action drama mood image"></iframe>
 </div>
 
-<h3 class="entry"><span class="rank-badge top">5</span> I Will Find You</h3>
-<p class="detail-line">Netflix · Mystery Miniseries · 27% Cancellation Probability</p>
-<p>This Harlan Coben adaptation was Netflix's biggest 2026 premiere, pulling 24 million views out of the gate.</p>
-<p>Critic and audience scores landed only in the low 60s, the one soft spot dragging down an otherwise huge debut.</p>
+<h3 class="entry"><span class="rank-badge">7</span> Teach You a Lesson</h3>
+<p class="detail-line">Netflix &middot; Korean Action Drama &middot; 25.99% &middot; 1-in-3.8</p>
+<p>The safest show on this list. It is not close.</p>
+<p><strong>94% audience score on Rotten Tomatoes. 8.5 on IMDb.</strong></p>
+<p>Three weeks at No.1 on the non-English chart. 39.3 million views.</p>
+<p>It premiered June 5. Netflix just has not had time yet. Every signal says renewal.</p>
 <div class="pills">
-<span class="pill score">27% Cancel Probability</span>
-<span class="pill">24M views, biggest 2026 debut</span>
-<span class="pill">62% critic / 66% audience score</span>
-</div>
-
-<h2>The 5 Safest Bets on Netflix Right Now</h2>
-<p>These are the undecided shows least likely to get cut, based on the same data.</p>
-
-<h3 class="entry"><span class="rank-badge">1</span> Man on Fire</h3>
-<p class="detail-line">Netflix · Action Drama · 23% Cancellation Probability</p>
-<p>Man on Fire pulled 35 million views across 7 weeks and spent its first two at No. 1 globally.</p>
-<p>That's the exact kind of run Netflix has rewarded with renewals all year, which is why this show has the lowest odds on the board.</p>
-<div class="pills">
-<span class="pill score">23% Cancel Probability</span>
-<span class="pill">35M views across 7 weeks</span>
-<span class="pill">2 weeks at No.1 on debut</span>
-</div>
-
-<h3 class="entry"><span class="rank-badge">2</span> Nemesis</h3>
-<p class="detail-line">Netflix · Crime Drama · 26% Cancellation Probability</p>
-<p>Nemesis debuted at No. 2 globally and hit the Top 10 in 83 countries, numbers most new shows never touch.</p>
-<p>No official renewal yet, but the creator has already talked about a Season 2 plan.</p>
-<div class="pills">
-<span class="pill score">26% Cancel Probability</span>
-<span class="pill">No.2 global debut, Top 10 in 83 countries</span>
-</div>
-
-<h3 class="entry"><span class="rank-badge">3</span> Teach You a Lesson</h3>
-<p class="detail-line">Netflix · Korean Action Drama · 27% Cancellation Probability</p>
-<p>This Korean action drama has owned Netflix's non-English charts since its June 5 premiere.</p>
-<p>It pulled 39.3 million views in three weeks and never left No. 1, exactly the kind of run that usually earns a renewal.</p>
-<div class="pills">
-<span class="pill score">27% Cancel Probability</span>
-<span class="pill">39.3M views in 3 weeks</span>
-<span class="pill">3 straight weeks at No.1, non-English chart</span>
+<span class="pill score">25.99%</span>
+<span class="pill">25 days</span>
+<span class="pill">3 weeks at No.1</span>
+<span class="pill">86% / 94% RT</span>
+<span class="pill">8.5 IMDb &middot; #24</span>
 </div>
 
 <div class="embed-wrap">
 <iframe src="pic3.html" height="420" loading="lazy" title="Streaming thriller mood image"></iframe>
 </div>
 
-<h3 class="entry"><span class="rank-badge">4</span> I Will Find You</h3>
-<p class="detail-line">Netflix · Mystery Miniseries · 27% Cancellation Probability</p>
-<p>This is the same show that appears on the at-risk list. 24 million views, Netflix's biggest debut of the year, is the reason it lands here too.</p>
-<p>The size of the audience is doing more work than the reviews, which is why this one could genuinely go either way.</p>
-<div class="pills">
-<span class="pill score">27% Cancel Probability</span>
-<span class="pill">24M views, biggest 2026 debut</span>
-</div>
-
-<h3 class="entry"><span class="rank-badge">5</span> Finding Her Edge</h3>
-<p class="detail-line">Netflix · Teen Drama · 35% Cancellation Probability</p>
-<p>The other show appearing on both lists. A Top 10 finish in 81 countries is a real signal of strength, even with a tracker reporting it's been cancelled.</p>
-<p>Until Netflix confirms one way or the other, this is the most genuinely unresolved show on the board.</p>
-<div class="pills">
-<span class="pill score">35% Cancel Probability</span>
-<span class="pill">Top 10 in 81 countries</span>
-</div>
-
-<h2>Expert Comment</h2>
 <div class="expert-block">
 <p class="quote-mark">&ldquo;</p>
-<p>Netflix doesn't wait for a show to find its footing anymore. The first month decides almost everything.</p>
-<p>What stands out this year is how little popularity protects a show. Boots doubled its audience and still got cut. Beef won at the Emmys and still sits at 53% cancellation odds.</p>
-<p>The takeaway for viewers is simple. Watch what you love in week one. That number does more work than any review.</p>
-<p>If a show isn't trending in its first month, the decision is probably already made.&rdquo;</p>
+<p>Netflix does not wait anymore. The first 28 days decide almost everything.</p>
+<p>Boots doubled its audience and still got cut. What matters is month one, not the reviews.</p>
+<p>If a show is not in the Top 10 within a week of launch, the decision is probably already made.&rdquo;</p>
 </div>
 <p class="attribution">Canada Sports Betting Data Analyst</p>
 
-<h2>What the Numbers Mean for Canadian Viewers</h2>
-<p>Eighteen cancellations in six months isn't a slow year for Netflix. It's the new normal. Viewership in month one now matters more than reviews, franchise loyalty, or awards.</p>
-<p>For Canadian subscribers watching the same queue as the US, the shows worth getting attached to are the ones posting strong week one numbers, like Man on Fire or Nemesis, not just the ones getting good reviews.</p>
-<p>Streaming is getting faster and less forgiving every season. Patience for a slow-building hit is disappearing, and not just at Netflix.</p>
-<p class="final-line">The next cancellation announcement is never far away.</p>
+<h2>What This Means for Canadian Viewers</h2>
+<p>Belfast and Beef are the shows to watch now, not later. Netflix does not send warnings before it cancels.</p>
+<p>Teach You a Lesson, I Will Find You, and Man on Fire all point toward renewal. They have the one thing Netflix rewards: viewers who showed up in week one.</p>
+<p class="final-line">The next cancellation is never far away.</p>
 
 <h2>Methodology</h2>
 <div class="methodology">
-<p><strong>What we measured.</strong> Every Netflix original series with a confirmed renewal, a confirmed cancellation, or an undecided status, as of June 30, 2026. 53 shows met that bar.</p>
-<p><strong>How confirmed shows were scored.</strong> An official renewal scored 0% cancellation probability. An official cancellation scored 100%.</p>
-<p><strong>How undecided shows were scored.</strong> Only shows with real viewership or critic data made the list. We weighted four factors: viewership trend (40%), critic and audience reception (20%), time since premiere without a decision, measured against Netflix's typical 28-day evaluation window (20%), and franchise or source material strength (20%).</p>
-<p><strong>What we left out.</strong> Lower-profile shows with no public viewership or critic data were excluded rather than guessed at.</p>
-<p><strong>One flagged conflict.</strong> Finding Her Edge has two trackers reporting opposite outcomes. We kept it in and flagged the disagreement instead of picking a side.</p>
-<p><strong>When the data was pulled.</strong> June 30, 2026. Netflix renewal news moves fast, so figures may shift after this date.</p>
+<p><strong>What we tracked.</strong> 52 Netflix originals as of June 30, 2026.</p>
+<p><strong>Confirmed shows.</strong> Official renewal = 0%. Official cancellation = 100%.</p>
+<p><strong>Undecided shows.</strong> Scored on four data points: Days Unresolved (35%), Weeks in Global Top 10 (25%), averaged RT critic, RT audience, and IMDb rating (25%), IMDb live popularity trend (15%). All figures verified directly from IMDb and Rotten Tomatoes on June 30, 2026.</p>
+<p><strong>What this is not.</strong> A comparative ranking. Not a guaranteed forecast.</p>
 </div>
 
 <h2>Sources</h2>
 <ul class="sources">
-<li>Rotten Tomatoes — Renewed and Cancelled TV Shows 2026 Tracker</li>
-<li>Deadline — 2026 TV Cancellations and Renewals</li>
-<li>TVGuide — Monthly Canceled and Renewed TV Shows Tracker</li>
-<li>What's on Netflix — Netflix Renewals 2026 Guide</li>
-<li>Netflix Tudum — Top 10 Weekly Charts</li>
-<li>ScreenRant — Netflix's 10 Most Watched 2026 TV Shows</li>
-<li>Men's Journal — Netflix Has Canceled 3 of Its Most-Watched Shows This Year</li>
-<li>ComingSoon.net — Netflix Audience Score Reporting, 2026</li>
-<li>HuffPost — Netflix Shows Canceled or Ending in 2026</li>
-<li>Newsweek — Netflix Cancels 11 Shows: Full List and Ratings</li>
-<li>Full Dataset: <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7Ayn_RHW8brcqXu53Hvxvp3UzRIId4i4m2iDxJuR34OnVz8DJDoAaEttKN2E0_w/pubhtml">View the complete renewal and cancellation tracker</a></li>
+<li>IMDb &mdash; Ratings and popularity data, verified June 30, 2026</li>
+<li>Rotten Tomatoes &mdash; Season-specific scores, verified June 30, 2026</li>
+<li>Netflix Tudum &mdash; Global Top 10 weekly charts</li>
+<li>Deadline &mdash; 2026 TV Cancellations and Renewals</li>
+<li>TVLine &mdash; Cancellations and renewals scorecard 2026</li>
+<li>What's on Netflix &mdash; Netflix Renewals 2026 Guide</li>
+<li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7Ayn_RHW8brcqXu53Hvxvp3UzRIId4i4m2iDxJuR34OnVz8DJDoAaEttKN2E0_w/pubhtml">Full dataset: Canada Sports Betting Netflix Cancellation Odds Index</a></li>
 </ul>
 
 </div>
